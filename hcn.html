@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<fieldset>
+    <legend>Rectangle</legend>
+    <form id="myForm">
+        CD : <input type="text" id="cd" ><br><br>
+        CR : <input type="text" id="cr"><br><br>
+        <input type="button" onclick="Reset()" value="Reset">
+        <input type="button" value="Click me !" id="click" onclick="doRec();">
+        <table>
+            <tr>
+                <td>Chu vi : <label id="cv"></label> </td>
+            </tr>
+            <tr>
+                <td>Dien tich : <label id="area"></label> </td>
+            </tr>
+            <tr>
+                <td>
+                    <canvas id="myCanvas" width="1368px" height="768px" style="border:1px solid #d3d3d3"></canvas>
+                </td>
+            </tr>
+        </table>
+    </form>
+</fieldset>
+<script>
+    function Reset() {
+        document.getElementById('myForm').reset();
+    }
+</script>
+<script>
+    function doRec() {
+        let cd = parseInt(document.getElementById('cd').value);
+        let cr = parseInt(document.getElementById('cr').value);
+        let rectangle = new Rectangle(cd, cr);
+        var length = rectangle.getCD();
+        var width = rectangle.getCR();
+        var cv = rectangle.getCV();
+        var area = rectangle.getArea();
+        document.getElementById('cv').innerHTML = cv;
+        document.getElementById('area').innerHTML = area;
+        var x = document.getElementById('myCanvas');
+        var ctx = x.getContext('2d');
+        ctx.beginPath();
+        ctx.rect(300,100,length,width);
+        ctx.stroke();
+    }
+</script>
+<script>
+    let Rectangle = function (cd, cr) {
+        this.cd = cd;
+        this.cr = cr;
+        this.getCD = function () {
+            return this.cd;
+        };
+        this.getCR = function () {
+            return this.cr;
+        };
+        this.getArea = function () {
+            return cr * cd;
+        };
+        this.getCV = function () {
+            return (cd + cr) * 2;
+        };
+    };
+</script>
+</body>
+</html>
